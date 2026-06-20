@@ -1,0 +1,680 @@
+:root {
+  color-scheme: light;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", system-ui, sans-serif;
+  background: #fff8dd;
+  color: #24352a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  background: #e5eadf;
+  color: #24352a;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #d6e2cf;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+button.primary {
+  background: #2f7d57;
+  color: #fff;
+}
+
+button.primary:hover:not(:disabled) {
+  background: #266847;
+}
+
+.teacher-toggle {
+  position: fixed;
+  z-index: 20;
+  top: 16px;
+  right: 16px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  padding: 0;
+  background: #2f7d57;
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(32, 56, 38, 0.22);
+}
+
+.app {
+  display: block;
+  min-height: 100vh;
+  padding: 12px;
+}
+
+.record-panel,
+.controls {
+  border: 1px solid #d8e2d2;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.record-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  min-height: calc(100vh - 24px);
+  padding: 18px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #fffdf0 0%, #f3fbef 100%);
+}
+
+.hero {
+  text-align: center;
+}
+
+.kicker,
+.student-message,
+.status-grid span,
+.count-row span,
+.meter-top span,
+.memo-label {
+  color: #637064;
+  font-weight: 700;
+}
+
+.kicker,
+.student-message {
+  margin: 0;
+}
+
+h1 {
+  margin: 2px 0 6px;
+  color: #b53655;
+  font-size: clamp(2.2rem, 5.2vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.student-message {
+  min-height: 1.8em;
+  font-size: clamp(1.1rem, 2vw, 1.7rem);
+}
+
+.bloom-stage {
+  display: inline-block;
+  margin: 0;
+  border: 2px solid #ffd1df;
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  background: #fff8fc;
+  color: #b53655;
+  font-weight: 900;
+  font-size: clamp(1rem, 1.8vw, 1.45rem);
+}
+
+.status-grid,
+.count-row {
+  display: grid;
+  gap: 10px;
+}
+
+.status-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.count-row {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 980px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.status-grid div,
+.count-row div {
+  min-width: 0;
+  border: 2px solid #ffd2df;
+  border-radius: 8px;
+  padding: 12px 16px;
+  background: #fff9fc;
+  box-shadow: 0 5px 14px rgba(165, 65, 100, 0.08);
+}
+
+.status-grid span,
+.count-row span {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
+
+.status-grid strong {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: clamp(1rem, 1.5vw, 1.35rem);
+  line-height: 1.35;
+}
+
+.count-row strong {
+  display: block;
+  overflow-wrap: anywhere;
+  color: #b53655;
+  font-size: clamp(1.4rem, 2.8vw, 2.5rem);
+  line-height: 1.05;
+}
+
+.bottom-info {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px minmax(280px, 0.8fr);
+  gap: 10px;
+  max-width: 1120px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.session-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  border: 1px solid #e1e8dd;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fbfcf8;
+}
+
+.session-actions button {
+  min-height: 56px;
+  padding: 0.7rem 0.6rem;
+  font-size: 1.05rem;
+}
+
+.meter-wrap {
+  border: 1px solid #e1e8dd;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fbfcf8;
+}
+
+.meter-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.meter {
+  position: relative;
+  height: 26px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #dfe9dc;
+}
+
+.meter div {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #6abf69, #f4c24b, #d9475d);
+  transition: width 80ms linear;
+}
+
+.meter i {
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  width: 3px;
+  background: #25382b;
+  left: 60%;
+}
+
+.tree-stage {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  flex: 1;
+  position: relative;
+}
+
+#sakuraSvg {
+  display: block;
+  width: 100%;
+  max-width: 1180px;
+  max-height: 64vh;
+  min-height: 390px;
+  border-radius: 8px;
+  box-shadow: 0 10px 28px rgba(59, 91, 65, 0.14);
+}
+
+.aisatsu-mascot {
+  position: absolute;
+  right: max(18px, calc((100% - 1180px) / 2 + 28px));
+  bottom: 14px;
+  width: clamp(110px, 14vw, 178px);
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #6b4d16;
+  cursor: pointer;
+  transform-origin: 50% 92%;
+  filter: drop-shadow(0 8px 10px rgba(36, 53, 42, 0.18));
+}
+
+.aisatsu-mascot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.aisatsu-mascot:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.aisatsu-mascot:hover:not(:disabled) {
+  background: transparent;
+  transform: translateY(-2px);
+}
+
+.aisatsu-mascot.high-fived {
+  animation: highFivePop 620ms ease-in-out;
+}
+
+.inclusive-actions {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  margin-top: -2px;
+}
+
+.high-five-help {
+  margin: 0;
+  color: #6f745d;
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+  font-weight: 800;
+}
+
+.gaze-note {
+  margin: 0;
+  color: #637064;
+  font-weight: 800;
+}
+
+.camera-check {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 8px;
+  border: 1px solid #dfe8da;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fbfcf8;
+}
+
+.camera-check video {
+  width: 100%;
+  max-height: 160px;
+  border-radius: 8px;
+  background: #dfe8da;
+  object-fit: cover;
+}
+
+.camera-check video[hidden] {
+  display: none;
+}
+
+.camera-check p {
+  margin: 0;
+  color: #637064;
+  font-weight: 800;
+}
+
+.speech-bubble {
+  position: absolute;
+  top: -24px;
+  left: -46px;
+  min-width: 116px;
+  border: 2px solid #f49ab9;
+  border-radius: 999px;
+  padding: 0.45rem 0.8rem;
+  background: rgba(255, 250, 252, 0.96);
+  color: #b53655;
+  font-weight: 900;
+  font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+  box-shadow: 0 6px 14px rgba(165, 65, 100, 0.14);
+  opacity: 0;
+  transform: translateY(6px) scale(0.94);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  right: 24px;
+  bottom: -9px;
+  width: 14px;
+  height: 14px;
+  border-right: 2px solid #f49ab9;
+  border-bottom: 2px solid #f49ab9;
+  background: rgba(255, 250, 252, 0.96);
+  transform: rotate(45deg);
+}
+
+.aisatsu-mascot.high-fived .speech-bubble {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: speechBubbleShow 1800ms ease both;
+}
+
+.high-five-label {
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  border-radius: 999px;
+  padding: 0.3rem 0.72rem;
+  background: #fff7dc;
+  color: #6b4d16;
+  font-size: 0.8rem;
+  font-weight: 900;
+  box-shadow: 0 4px 10px rgba(135, 98, 25, 0.16);
+}
+
+.flower {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bloom 360ms ease-out both;
+}
+
+.petal {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: floatPetal 2600ms ease-in-out infinite;
+}
+
+.full-bloom-overlay {
+  display: none;
+  pointer-events: none;
+}
+
+.full-bloom-overlay rect {
+  fill: rgba(255, 250, 252, 0.92);
+  stroke: #f49ab9;
+  stroke-width: 4;
+}
+
+.full-bloom-overlay text {
+  fill: #b53655;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Meiryo", system-ui, sans-serif;
+  font-weight: 900;
+  text-anchor: middle;
+}
+
+.full-bloom-overlay text:first-of-type {
+  font-size: 32px;
+}
+
+.full-bloom-overlay text:last-of-type {
+  font-size: 24px;
+}
+
+.record-panel.full-bloom .full-bloom-overlay {
+  display: block;
+}
+
+@keyframes bloom {
+  from {
+    opacity: 0;
+    transform: scale(0.1) rotate(-18deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes floatPetal {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes highFivePop {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  35% {
+    transform: translateY(-8px) scale(1.08) rotate(-2deg);
+  }
+  68% {
+    transform: translateY(2px) scale(0.98);
+  }
+}
+
+@keyframes speechBubbleShow {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.94);
+  }
+  12%,
+  78% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+}
+
+.controls {
+  position: fixed;
+  z-index: 15;
+  top: 86px;
+  right: 16px;
+  width: min(390px, calc(100vw - 32px));
+  max-height: calc(100vh - 108px);
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px;
+  overflow: auto;
+  border-radius: 8px;
+  box-shadow: 0 18px 48px rgba(26, 43, 32, 0.2);
+}
+
+.controls.open {
+  display: flex;
+}
+
+.button-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.memo-label {
+  margin-bottom: -10px;
+}
+
+textarea,
+input[type="number"],
+select {
+  width: 100%;
+  border: 1px solid #cbd8c4;
+  border-radius: 8px;
+  padding: 0.7rem;
+  background: #fff;
+  color: #24352a;
+}
+
+textarea {
+  resize: vertical;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.settings-grid {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.settings-grid label {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+  color: #475448;
+  font-weight: 700;
+}
+
+.settings-grid input[type="range"] {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.settings-grid input[type="number"] {
+  grid-column: 1 / -1;
+}
+
+.settings-grid select {
+  grid-column: 1 / -1;
+}
+
+.settings-grid .check-setting {
+  grid-template-columns: auto 1fr;
+  justify-content: start;
+}
+
+.check-setting input {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.history {
+  border-top: 1px solid #dfe8da;
+  padding-top: 12px;
+}
+
+.history-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.history h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.history-head button {
+  padding: 0.5rem 0.7rem;
+  font-size: 0.9rem;
+}
+
+.history-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.history-item {
+  border: 1px solid #e1e8dd;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fbfcf8;
+}
+
+.history-item strong {
+  display: block;
+}
+
+.history-item span {
+  color: #657066;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 980px) {
+  .bottom-info {
+    grid-template-columns: 1fr;
+  }
+
+  .session-actions {
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  #sakuraSvg {
+    max-height: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .app {
+    padding: 10px;
+  }
+
+  .record-panel,
+  .controls {
+    padding: 14px;
+  }
+
+  .status-grid,
+  .button-row {
+    grid-template-columns: 1fr;
+  }
+
+  .count-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .count-row div {
+    padding: 9px 6px;
+  }
+
+  .count-row span {
+    font-size: 0.78rem;
+  }
+
+  #sakuraSvg {
+    min-height: 330px;
+  }
+
+  .aisatsu-mascot {
+    right: 14px;
+    bottom: 10px;
+    width: 102px;
+  }
+
+  .speech-bubble {
+    left: -58px;
+    top: -22px;
+    min-width: 104px;
+    font-size: 0.9rem;
+  }
+}
